@@ -4,17 +4,16 @@ import ReactDOM from 'react-dom';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 // registerServiceWorker();
-import {createStore,applyMiddleware,compose} from 'redux'
-import {Provider} from 'react-redux'
-import {BrowserRouter,Link,Route,Redirect,Switch} from 'react-router-dom'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { Provider } from 'react-redux'
+import { BrowserRouter, Link, Route, Redirect, Switch } from 'react-router-dom'
 import thunk from 'redux-thunk'
-import App from './App';
-import Auth from './Auth'
-import Dashboard from './Dashboard'
 import reducers from './reduces'
+import Login from './containers/Login/Login'
+import Register from './containers/Register/Register'
 
-const reduxDevtools = window.devToolsExtension ? window.devToolsExtension() : f=> f
-const store = createStore(reducers,compose(
+const reduxDevtools = window.devToolsExtension ? window.devToolsExtension() : f => f
+const store = createStore(reducers, compose(
     applyMiddleware(thunk),
     reduxDevtools
 ))
@@ -22,16 +21,15 @@ console.log(store.getState())
 
 
 ReactDOM.render(
-    (<Provider store={store}>  
+    (<Provider store={store}>
         <BrowserRouter>
-           <Switch>
-                    <Route path='/login' component={Auth} exact></Route>
-                    <Route path='/dashboard' component={Dashboard}></Route>
-                    <Redirect to='dashboard'></Redirect>
-                </Switch>
+            <div>
+                <Route path='/login' component={Login} ></Route>
+                <Route path='/register' component={Register}></Route>
+            </div>
         </BrowserRouter>
     </Provider>)
-    ,document.getElementById('root')
+    , document.getElementById('root')
 )
 
 
