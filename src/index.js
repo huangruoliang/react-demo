@@ -11,6 +11,8 @@ import thunk from 'redux-thunk'
 import reducers from './reduces'
 import Login from './containers/Login/Login'
 import Register from './containers/Register/Register'
+import AuthRoute from './components/authroute/authroute'
+import './config'
 
 const reduxDevtools = window.devToolsExtension ? window.devToolsExtension() : f => f
 const store = createStore(reducers, compose(
@@ -24,6 +26,7 @@ ReactDOM.render(
     (<Provider store={store}>
         <BrowserRouter>
             <div>
+                <AuthRoute></AuthRoute>
                 <Route path='/login' component={Login} ></Route>
                 <Route path='/register' component={Register}></Route>
             </div>
