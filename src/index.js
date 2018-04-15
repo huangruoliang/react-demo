@@ -12,6 +12,7 @@ import reducers from './reduces'
 import Login from './containers/Login/Login'
 import Register from './containers/Register/Register'
 import AuthRoute from './components/authroute/authroute'
+import BossInfo from './containers/BossInfo/BossInfo'
 import './config'
 
 const reduxDevtools = window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -19,7 +20,6 @@ const store = createStore(reducers, compose(
     applyMiddleware(thunk),
     reduxDevtools
 ))
-console.log(store.getState())
 
 
 ReactDOM.render(
@@ -29,6 +29,7 @@ ReactDOM.render(
                 <AuthRoute></AuthRoute>
                 <Route path='/login' component={Login} ></Route>
                 <Route path='/register' component={Register}></Route>
+                <Route path='/bossinfo' component={BossInfo}></Route>
             </div>
         </BrowserRouter>
     </Provider>)

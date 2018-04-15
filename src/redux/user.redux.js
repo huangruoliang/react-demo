@@ -15,9 +15,11 @@ let initState = {
 export function user(state = initState, action) {
     switch (action.type) {
         case REGISTER_SUCCESS:
-            return { ...state, redirectTo: getRedirectPath(state.type), isAuth: true, ...action.payload }
+            console.log(1)
+            return { ...state, redirectTo: getRedirectPath(action.payload), isAuth: true, ...action.payload }
         case LOGIN_SUCCESS:
-            return { ...state, redirectTo: getRedirectPath(state.type), isAuth: true, ...action.payload }
+            console.log(action)
+            return { ...state, redirectTo: getRedirectPath(action.payload), isAuth: true, ...action.payload }
         case ERR_MSG:
             return { ...state, msg: action.msg, isAuth: false, ...action.payload }
 
@@ -45,6 +47,7 @@ export function login({ user, password }) {
         axios.post('/user/login', { user, password }).
             then(res => {
                 if (res.data.code == 0) {
+                    
                     dispatch(loginSuccess(res.data.data))
                 } else {
                     dispatch(errMsg(res.data.msg))
