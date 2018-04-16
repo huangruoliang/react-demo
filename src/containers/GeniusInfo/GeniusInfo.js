@@ -3,7 +3,7 @@ import { NavBar } from 'antd-mobile';
 import AvatorSelector from '../../components/avator-selector/avator-selector'
 import { InputItem, TextareaItem, Button, WingBlank } from 'antd-mobile'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import { update } from '../../redux/user.redux'
 @connect(
     state => state.user,
@@ -14,9 +14,8 @@ class BossInfo extends React.Component {
         super(props)
         this.state = {
             title: '',
-            company: '',
-            money: '',
-            desc: ''
+            desc: '',
+            avator:''
         }
         this.selectAvator = this.selectAvator.bind(this)
     }
@@ -32,26 +31,23 @@ class BossInfo extends React.Component {
     }
 
     render() {
-        console.log(this)
         return (
             <div>
                 {this.props.redirectTo ? <Redirect to= {this.props.redirectTo}></Redirect> : null }
                 <NavBar
                     mode="dark"
-                >BOSS完善信息</NavBar>
+                >牛人完善信息</NavBar>
                 <AvatorSelector
                     selectAvator={this.selectAvator}
                 ></AvatorSelector>
-                <InputItem onChange={v => this.onChange('title', v)}>招聘职位</InputItem>
-                <InputItem onChange={v => this.onChange('company', v)}>公司名称</InputItem>
-                <InputItem onChange={v => this.onChange('money', v)}>职位薪资</InputItem>
+                <InputItem onChange={v => this.onChange('title', v)}>求职岗位</InputItem>
+
                 <TextareaItem
-                    title="职位要求"
+                    title="个人简介"
                     onChange={v => this.onChange('desc', v)}
                     autoHeight
                     rows={3}
                 />
-
                 <WingBlank>
                     <Button
                         type='primary'

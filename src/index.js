@@ -13,6 +13,7 @@ import Login from './containers/Login/Login'
 import Register from './containers/Register/Register'
 import AuthRoute from './components/authroute/authroute'
 import BossInfo from './containers/BossInfo/BossInfo'
+import GeniusInfo from './containers/GeniusInfo/GeniusInfo'
 import './config'
 
 const reduxDevtools = window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -30,6 +31,7 @@ ReactDOM.render(
                 <Route path='/login' component={Login} ></Route>
                 <Route path='/register' component={Register}></Route>
                 <Route path='/bossinfo' component={BossInfo}></Route>
+                <Route path='/geniusinfo' component={GeniusInfo}></Route>
             </div>
         </BrowserRouter>
     </Provider>)

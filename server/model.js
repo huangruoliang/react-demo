@@ -11,7 +11,7 @@ const models = {
         'user': {type: String, require: true},
         'password': {type: String, require: true},
         'type': {type: String, require: true},
-        'avatar': {type: String},
+        'avator': {type: String},
         'desc': {type: String},
         'title': {type: String},
         'company': {type: String},
