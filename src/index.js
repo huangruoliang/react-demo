@@ -14,7 +14,9 @@ import Register from './containers/Register/Register'
 import AuthRoute from './components/authroute/authroute'
 import BossInfo from './containers/BossInfo/BossInfo'
 import GeniusInfo from './containers/GeniusInfo/GeniusInfo'
+import Dashboard from './components/dashboard/dashboard'
 import './config'
+import './index.css'
 
 const reduxDevtools = window.devToolsExtension ? window.devToolsExtension() : f => f
 const store = createStore(reducers, compose(
@@ -28,10 +30,13 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <AuthRoute></AuthRoute>
-                <Route path='/login' component={Login} ></Route>
-                <Route path='/register' component={Register}></Route>
-                <Route path='/bossinfo' component={BossInfo}></Route>
-                <Route path='/geniusinfo' component={GeniusInfo}></Route>
+                <Switch>
+                    <Route path='/login' component={Login} ></Route>
+                    <Route path='/register' component={Register}></Route>
+                    <Route path='/bossinfo' component={BossInfo}></Route>
+                    <Route path='/geniusinfo' component={GeniusInfo}></Route>
+                    <Route component= {Dashboard}></Route>
+                </Switch>
             </div>
         </BrowserRouter>
     </Provider>)

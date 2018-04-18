@@ -4,20 +4,21 @@ const Router = express.Router();
 const models = require('./model')
 const User = models.getModel('user')
 
-const _filter = {'password':0,'__v':0}
+const _filter = { 'password': 0, '__v': 0 }
 
 
 Router.get('/list', function (req, res) {
-    User.find({}, function (err, doc) {
-        return res.json(doc)
+    const { type } = req.query
+    console.log(type)
+    User.find({ type }, function (err, doc) {
+        return res.json({ code: 0, data: doc })
     })
 })
 Router.post('/login', function (req, res) {
-    const {user,password} = req.body
-	User.findOne({user,password:utils.md5(password)},_filter,function(err,doc){
+    const { user, password } = req.body
+    User.findOne({ user, password: utils.md5(password) }, _filter, function (err, doc) {
         if (doc) {
             res.cookie('userid', doc._id)
-            console.log(doc)
             return res.json({ code: 0, data: doc })
         } else {
             return res.json({ code: 1, msg: '用户名或密码错误' })

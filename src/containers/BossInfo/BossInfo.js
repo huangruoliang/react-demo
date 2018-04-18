@@ -32,7 +32,6 @@ class BossInfo extends React.Component {
     }
 
     render() {
-        console.log(this)
         return (
             <div>
                 {this.props.redirectTo ? <Redirect to= {this.props.redirectTo}></Redirect> : null }

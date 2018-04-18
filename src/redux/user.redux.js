@@ -2,6 +2,7 @@ import axios from 'axios'
 import { getRedirectPath } from '../util'
 const ERR_MSG = 'ERR_MSG'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
+const LOAD_DATA = 'LOAD_DATA'
 
 let initState = {
     redirectTo: '',
@@ -15,6 +16,8 @@ export function user(state = initState, action) {
         case AUTH_SUCCESS:
             console.log(action)
             return { ...state, redirectTo: getRedirectPath(action.payload), ...action.payload }
+        case LOAD_DATA:
+            return { ...state, ...action.payload }
         case ERR_MSG:
             return { ...state, msg: action.msg, isAuth: false, ...action.payload }
         default:
@@ -23,12 +26,14 @@ export function user(state = initState, action) {
 }
 
 function authSuccess(data) {
-    return {type: AUTH_SUCCESS, payload: data}
+    return { type: AUTH_SUCCESS, payload: data }
 }
 function errMsg(msg) {
     return { msg, type: ERR_MSG }
 }
-
+export function loadData(userinfo){
+	return { type:LOAD_DATA, payload:userinfo}
+}
 
 export function login({ user, password }) {
     if (!user || !password) {
@@ -66,7 +71,6 @@ export function register({ user, password, repeatpwd, type }) {
 }
 
 export function update(data) {
-    console.log(data)
     return dispatch => {
         axios.post('/user/update', data)
             .then(res => {
@@ -74,7 +78,7 @@ export function update(data) {
                     dispatch(authSuccess(res.data.data))
                 } else {
                     dispatch(errMsg(res.data.msg))
-                } 
+                }
             })
     }
 
