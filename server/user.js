@@ -9,7 +9,6 @@ const _filter = { 'password': 0, '__v': 0 }
 
 Router.get('/list', function (req, res) {
     const { type } = req.query
-    console.log(type)
     User.find({ type }, function (err, doc) {
         return res.json({ code: 0, data: doc })
     })

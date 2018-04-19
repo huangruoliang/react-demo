@@ -1,38 +1,36 @@
+
 import React from 'react'
-import { TabBar } from 'antd-mobile'
-import Prototypes from 'prop-types'
+import PropTypes from 'prop-types'
+import {TabBar} from 'antd-mobile'
 import {withRouter} from 'react-router-dom'
 @withRouter
-class Navlink extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-    static proTytypes = {
-        data: Prototypes.array.isRequired
-    }
-
-    render() {
-        const navList = this.props.data.filter(v => !v.hide)
-        return (
-            <TabBar>
-                {navList.map(v => (
-                    <TabBar.Item
-                        title={v.text}
-                        icon={{
-                            uri: require(`./img/${v.icon}.png`)
-                        }}
-                        selectedIcon={{
-                            uri: require(`./img/${v.icon}-active.png`)
-                        }}
-                        selected = {this.props.location.pathname === v.path}
-                        key={v.path}
-                        onPress={() => {
-                           this.props.history.push(v.path)
-                          }}
-                    >
-                    </TabBar.Item>
-                ))}
-            </TabBar>)
-    }
+class NavLinkBar extends React.Component{
+	static propTypes = {
+		data: PropTypes.array.isRequired
+	}
+	render(){
+		
+		const navList = this.props.data.filter(v=>!v.hide)
+		const {pathname} = this.props.location
+		return (
+			<TabBar>
+				{navList.map(v=>(
+					<TabBar.Item
+						key={v.path}
+						title={v.text}
+						icon={{uri: require(`./img/${v.icon}.png`)}}
+						selectedIcon={{uri: require(`./img/${v.icon}-active.png`)}}
+						selected={pathname===v.path}
+						onPress={()=>{
+							this.props.history.push(v.path)
+						}}
+					>
+					
+					</TabBar.Item>
+				))}
+			</TabBar>
+		)
+	}
 }
-export default Navlink
+
+export default NavLinkBar
